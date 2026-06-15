@@ -14,9 +14,9 @@ import os
 import uuid
 from typing import Optional
 
-import anthropic
 from dotenv import load_dotenv
 from fastapi import Body, FastAPI, WebSocket, WebSocketDisconnect
+from openai import OpenAI
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
@@ -35,9 +35,10 @@ load_dotenv()
 
 app = FastAPI(title="Stock Agent MCP Host")
 
-# LLM 客户端
-llm_client = anthropic.Anthropic(
-    api_key=os.getenv("ANTHROPIC_API_KEY", ""),
+# LLM 客户端 — 阿里云百炼 OpenAI Compatible
+llm_client = OpenAI(
+    api_key=os.getenv("DASHSCOPE_API_KEY", ""),
+    base_url="https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 # 共享库组件（进程内直接 import，不走 MCP）
@@ -71,8 +72,8 @@ async def startup():
     # 初始化编排器
     global orchestrator
     orchestrator = Orchestrator(
-        anthropic_client=llm_client,
-        model=os.getenv("CLAUDE_MODEL", "claude-sonnet-4-6"),
+        client=llm_client,
+        model=os.getenv("LLM_MODEL", "qwen3.7-plus"),
         mcp_clients=mcp_clients,
     )
 

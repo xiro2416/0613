@@ -9,7 +9,7 @@
 
 | 层 | 技术 |
 |---|---|
-| Host 编排 | Python (FastAPI) + Anthropic SDK |
+| Host 编排 | Python (FastAPI) + OpenAI SDK (阿里云百炼) |
 | MCP Server | Python (mcp SDK) × 5 进程 |
 | 共享库 | Python (shared/) — knowledge / market_data / memory |
 | 传输 | MCP Protocol (STDIO) |
@@ -138,7 +138,7 @@
 
 ### 高
 - [ ] 各 Tool 功能逻辑实现（替换 `...` 存根）
-- [ ] Anthropic API Key 配置 + LLM 联调
+- [x] ~~Anthropic API Key~~ → 阿里云百炼 API 配置 (qwen3.7-plus, 2026-06-15)
 - [ ] 知识库检索后端选型（grep → RAG 迁移路径）
 - [ ] TimeGate 交易日历 API 对接（当前硬编码 2026 年节假日）
 
