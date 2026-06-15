@@ -101,14 +101,14 @@
 | 文件 | 说明 | 状态 |
 |---|---|---|
 | `types.py` | 全局类型收拢 | ✅ |
-| `knowledge/manager.py` | KnowledgeManager 统一入口 | ✅ |
-| `knowledge/retriever.py` | Grep/RAG/Hybrid 检索器 | ✅ |
-| `knowledge/market_narratives.py` | 市场历史叙事 | ✅ |
-| `knowledge/market_terms.py` | 交易术语库 | ✅ |
-| `knowledge/meme_library.py` | 热梗语料库 | ✅ |
+| `knowledge/manager.py` | KnowledgeManager 统一入口 | ✅ (2026-06-15: 增加 _seed_retriever) |
+| `knowledge/retriever.py` | Grep/RAG/Hybrid 检索器 | ✅ GrepRetriever 已实现 (2026-06-15) |
+| `knowledge/market_narratives.py` | 市场历史叙事 | ⏳ 待后续 |
+| `knowledge/market_terms.py` | 交易术语库 | ✅ 50条术语已实现 (2026-06-15) |
+| `knowledge/meme_library.py` | 热梗语料库 | ✅ 30条热梗已实现 (2026-06-15) |
 | `market_data/client.py` | 行情 API 对接层 | ✅ |
 | `memory/manager.py` | MemoryManager | ✅ |
-| `memory/store.py` | SQLite 存储层 | ✅ |
+| `memory/store.py` | SQLite 存储层 | ✅ 已实现 (2026-06-15) |
 
 ### 前端 `frontend/`
 
@@ -123,14 +123,14 @@
 | 模块 | 文档 | MCP Server | 工具实现 |
 |---|---|---|---|
 | 中枢 + 时间 + 人设 + 渲染 | [00-core.md](docs/modules/00-core.md) | Host 内置 | ⏳ |
-| 知识库 | 本文档 | shared/knowledge/ | ⏳ |
+| 知识库 | 本文档 | shared/knowledge/ | ✅ 术语+热梗已实现 (2026-06-15) |
 | 行情数据 | 本文档 | shared/market_data/ | ⏳ |
-| 记忆系统 | 本文档 | shared/memory/ | ⏳ |
-| 一：行情分析 | [01-market-analyzer.md](docs/modules/01-market-analyzer.md) | market-analyzer server | ⏳ |
-| 二：人性对齐 | [02-psychology-mirror.md](docs/modules/02-psychology-mirror.md) | psychology-mirror server | ⏳ |
-| 三：心理按摩 | [03-meme-comfort.md](docs/modules/03-meme-comfort.md) | meme-comfort server | ⏳ |
-| 四：社交辅助 | [04-social-tactician.md](docs/modules/04-social-tactician.md) | social-tactician server | ⏳ |
-| 五：生活服务 | [05-life-service.md](docs/modules/05-life-service.md) | life-service server | ⏳ |
+| 记忆系统 | 本文档 | shared/memory/ | ✅ store.py ✅ (2026-06-15) |
+| 一：行情分析 | [01-market-analyzer.md](docs/modules/01-market-analyzer.md) | market-analyzer server | ⚠️ 待行情数据 |
+| 二：人性对齐 | [02-psychology-mirror.md](docs/modules/02-psychology-mirror.md) | psychology-mirror server | ✅ (2026-06-15) |
+| 三：心理按摩 | [03-meme-comfort.md](docs/modules/03-meme-comfort.md) | meme-comfort server | ✅ (2026-06-15) |
+| 四：社交辅助 | [04-social-tactician.md](docs/modules/04-social-tactician.md) | social-tactician server | ✅ (2026-06-15) |
+| 五：生活服务 | [05-life-service.md](docs/modules/05-life-service.md) | life-service server | ✅ (2026-06-15) |
 
 ---
 

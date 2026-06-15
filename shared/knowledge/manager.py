@@ -37,6 +37,17 @@ class KnowledgeManager:
         # 知识域权重（人设切换时同步更新）
         self._weights: dict[str, float] = {}
 
+        # 向 GrepRetriever 注入语料
+        self._seed_retriever()
+
+    def _seed_retriever(self) -> None:
+        """从各 domain class 导出 entries 注入 GrepRetriever。"""
+        grep = self._retrievers.get(RetrievalMode.GREP)
+        if grep is None or not hasattr(grep, "add_entries"):
+            return
+        grep.add_entries(self._terms.get_all_entries())
+        grep.add_entries(self._meme.get_all_entries())
+
     # ── 通用查询 ──────────────────────────────
 
     def query(self, query: KnowledgeQuery) -> KnowledgeResult:

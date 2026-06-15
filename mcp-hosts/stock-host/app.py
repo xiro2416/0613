@@ -16,7 +16,7 @@ from typing import Optional
 
 import anthropic
 from dotenv import load_dotenv
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import Body, FastAPI, WebSocket, WebSocketDisconnect
 from mcp import ClientSession, StdioServerParameters
 from mcp.client.stdio import stdio_client
 
@@ -134,7 +134,38 @@ async def get_user_profile(user_id: str):
         "holdings": profile.holdings,
         "trading_style": profile.trading_style,
         "risk_tolerance": profile.risk_tolerance,
+        "psychological_state": profile.psychological_state,
+        "defense_boundary": profile.defense_boundary,
         "consecutive_losses": profile.consecutive_losses,
+    }
+
+
+@app.post("/api/users/{user_id}/profile")
+async def update_user_profile(user_id: str, request: dict = Body(...)):
+    """更新用户画像（MVP: 用户手动设置）
+
+    可更新字段:
+      - holdings: list[str]
+      - trading_style: str
+      - risk_tolerance: str
+      - psychological_state: str
+      - defense_boundary: str
+      - consecutive_losses: int
+    """
+    # 确保用户存在
+    profile = memory_manager.get_user_profile(user_id)
+    if profile is None:
+        profile = memory_manager.create_user_profile(user_id)
+
+    updated = memory_manager.update_user_profile(user_id, request)
+    return {
+        "user_id": updated.user_id,
+        "holdings": updated.holdings,
+        "trading_style": updated.trading_style,
+        "risk_tolerance": updated.risk_tolerance,
+        "psychological_state": updated.psychological_state,
+        "defense_boundary": updated.defense_boundary,
+        "consecutive_losses": updated.consecutive_losses,
     }
 
 
